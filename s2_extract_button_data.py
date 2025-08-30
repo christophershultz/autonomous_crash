@@ -29,7 +29,7 @@ for file in files:
     print(file)
     val = PdfReader(file)
     raw = lowercase_dict(val.get_fields()) # For checkboxes/radios use raw fields
-
+    pdb.set_trace()
     # AM/PM
     if raw['am'].value: result['am'].append(1)
     else: result['am'].append(0)
@@ -93,6 +93,30 @@ for file in files:
     elif raw['lighting c 1'].value or raw['lighting c 2'].value: result['lighting'].append('dark-streetlights')
     elif raw['lighting d 1'].value or raw['lighting d 2'].value or raw['lighting e 1'].value or raw['lighting e 2'].value: result['lighting'].append('dark-no lights')
     else: result['lighting'].append(None)
-    break
+    
+    # Road Surface
+    if raw['roadway a 1'].value or raw['roadway a 2'].value: result['road_surface'].append('dry')
+    elif raw['roadway b 1'].value or raw['roadway b 2'].value: result['road_surface'].append('wet')
+    elif raw['roadway c 1'].value or raw['roadway c 2'].value: result['road_surface'].append('snowy-icy')
+    elif raw['roadway d 1'].value or raw['roadway d 2'].value: result['road_surface'].append('slippery')
+    else: result['road_surface'].append(None)
 
-pdb.set_trace()
+    # Road Condition
+    if raw['road conditions a 1'].value or raw['road conditions a 2'].value: result['road_condition'].append('holes/ruts')
+    elif raw['road conditions b 1'].value or raw['road conditions b 2'].value: result['road_condition'].append('loose_material')
+    elif raw['road conditions c 1'].value or raw['road conditions c 2'].value: result['road_condition'].append('obstruction')
+    elif raw['road conditions d 1'].value or raw['road conditions d 2'].value: result['road_condition'].append('construction_zone')
+    elif raw['road conditions e 1'].value or raw['road conditions e 2'].value: result['road_condition'].append('reduced_width')
+    elif raw['road conditions f 1'].value or raw['road conditions f 2'].value: result['road_condition'].append('flooded')
+    elif raw['road conditions g 1'].value or raw['road conditions g 2'].value: result['road_condition'].append('other')
+    elif raw['road conditions h 1'].value or raw['road conditions h 2'].value: result['road_condition'].append('normal')
+    else: result['road_condition'].append(None)
+
+
+    # Next: movement for both vehicles, type of collision for both vehicles, other factors. 
+
+    # Create the headers for each actual variable above. 
+
+    # Save them all to a data frame with the file name in each
+
+    # Export as pickle --> In the next file, join them together. 
