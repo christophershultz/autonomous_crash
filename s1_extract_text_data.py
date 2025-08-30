@@ -45,7 +45,7 @@ for file in files:
 
 res = pd.DataFrame(result)
 
-with open('files_output.csv', 'wb') as f: 
+with open('files_output.pkl', 'wb') as f: 
     pickle.dump(res, f)
 
 print("DONE")
