@@ -22,78 +22,82 @@ def lowercase_dict(original_dict):
     return new_dict
 
 result = {} 
-cols = ['filename', 'rear', 'left-back-side', 'left-front-side', 'front', 'right-back-side', 'right-front-side', 'rear-inner-mid', 'front-inner-mid', 'rear-inner-core', 'front-inner-core']
+cols = ['filename', 'rear', 'left-back-side', 'left-front-side', 'front', 'right-back-side', 'right-front-side', 'rear-inner-mid', 
+        'front-inner-mid', 'rear-inner-core', 'front-inner-core']
+
 for col in cols: 
     result[col] = [] 
 
 ct = 0
 for file in files: 
-
-    print(file)
-    val = PdfReader(file)
-    raw = lowercase_dict(val.get_fields()) # For checkboxes/radios use raw fields
-
     try: 
-        if raw['leftrear1'].value or raw['rearbumper'].value or raw['rightrear1'].value: result['rear'].append(1)
-        else: result['rear'].append(0)
-    except: 
-        result['rear'].append(0)
+        print(file)
+        val = PdfReader(file)
+        raw = lowercase_dict(val.get_fields()) # For checkboxes/radios use raw fields
 
-    try: 
-        if raw['leftrear2'].value or raw['leftrearpassenger1'].value or raw['leftrearpassenger3'].value: result['left-back-side'].append(1)
-        else: result['left-back-side'].append(0)
-    except: 
-        result['left-back-side'].append(0)
+        try: 
+            if raw['leftrear1'].value or raw['rearbumper'].value or raw['rightrear1'].value: result['rear'].append(1)
+            else: result['rear'].append(0)
+        except: 
+            result['rear'].append(0)
 
-    try: 
-        if raw['frontdriverside1'].value or raw['frontdriverside3'].value or raw['leftfrontcorner1'].value: result['left-front-side'].append(1)
-        else: result['left-front-side'].append(0)
-    except: 
-        result['left-front-side'].append(0)
+        try: 
+            if raw['leftrear2'].value or raw['leftrearpassenger1'].value or raw['leftrearpassenger3'].value: result['left-back-side'].append(1)
+            else: result['left-back-side'].append(0)
+        except: 
+            result['left-back-side'].append(0)
 
-    try: 
-        if raw['leftfrontcorner3'].value or raw['frontbumper'].value or raw['rightfrontcorner3'].value: result['front'].append(1)
-        else: result['front'].append(0)
-    except: 
-        result['front'].append(0)
+        try: 
+            if raw['frontdriverside1'].value or raw['frontdriverside3'].value or raw['leftfrontcorner1'].value: result['left-front-side'].append(1)
+            else: result['left-front-side'].append(0)
+        except: 
+            result['left-front-side'].append(0)
 
-    try: 
-        if raw['rightrear3'].value or raw['rightrearpassenger2'].value or raw['rightrearpassenger4'].value: result['right-back-side'].append(1)
-        else: result['right-back-side'].append(0)
-    except: 
-        result['right-back-side'].append(0)
+        try: 
+            if raw['leftfrontcorner3'].value or raw['frontbumper'].value or raw['rightfrontcorner3'].value: result['front'].append(1)
+            else: result['front'].append(0)
+        except: 
+            result['front'].append(0)
 
-    try: 
-        if raw['frontpassengerside2'].value or raw['frontpassengerside4'].value or raw['rightfrontcorner2'].value: result['right-front-side'].append(1)
-        else: result['right-front-side'].append(0)
-    except: 
-        result['right-front-side'].append(0)
+        try: 
+            if raw['rightrear3'].value or raw['rightrearpassenger2'].value or raw['rightrearpassenger4'].value: result['right-back-side'].append(1)
+            else: result['right-back-side'].append(0)
+        except: 
+            result['right-back-side'].append(0)
 
-    try: 
-        if raw['leftrear3'].value or raw['rightrear2'].value: result['rear-inner-mid'].append(1)
-        else: result['rear-inner-mid'].append(0)
-    except: 
-        result['rear-inner-mid'].append(0)
+        try: 
+            if raw['frontpassengerside2'].value or raw['frontpassengerside4'].value or raw['rightfrontcorner2'].value: result['right-front-side'].append(1)
+            else: result['right-front-side'].append(0)
+        except: 
+            result['right-front-side'].append(0)
 
-    try: 
-        if raw['leftfrontcorner2'].value or raw['rightfrontcorner1'].value: result['front-inner-mid'].append(1)
-        else: result['front-inner-mid'].append(0)
-    except: 
-        result['front-inner-mid'].append(0)
+        try: 
+            if raw['leftrear3'].value or raw['rightrear2'].value: result['rear-inner-mid'].append(1)
+            else: result['rear-inner-mid'].append(0)
+        except: 
+            result['rear-inner-mid'].append(0)
 
-    try: 
-        if raw['leftrearpassenger2'].value or raw['leftrearpassenger4'].value or raw['rightrearpassenger1'].value or raw['rightrearpassenger3'].value: result['rear-inner-core'].append(1)
-        else: result['rear-inner-core'].append(0)
-    except: 
-        result['rear-inner-core'].append(0)
+        try: 
+            if raw['leftfrontcorner2'].value or raw['rightfrontcorner1'].value: result['front-inner-mid'].append(1)
+            else: result['front-inner-mid'].append(0)
+        except: 
+            result['front-inner-mid'].append(0)
 
-    try: 
-        if raw['frontdriverside2'].value or raw['frontdriverside4'].value or raw['frontpassengerside1'].value or raw['frontpassengerside3'].value: result['front-inner-core'].append(1)
-        else: result['front-inner-core'].append(0)
-    except: 
-        result['front-inner-core'].append(0)
+        try: 
+            if raw['leftrearpassenger2'].value or raw['leftrearpassenger4'].value or raw['rightrearpassenger1'].value or raw['rightrearpassenger3'].value: result['rear-inner-core'].append(1)
+            else: result['rear-inner-core'].append(0)
+        except: 
+            result['rear-inner-core'].append(0)
 
-    result['filename'].append(file)
+        try: 
+            if raw['frontdriverside2'].value or raw['frontdriverside4'].value or raw['frontpassengerside1'].value or raw['frontpassengerside3'].value: result['front-inner-core'].append(1)
+            else: result['front-inner-core'].append(0)
+        except: 
+            result['front-inner-core'].append(0)
+
+        result['filename'].append(file)
+    except: 
+        pass
 
 # Save them all to a data frame with the file name in each
 
